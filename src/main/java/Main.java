@@ -9,7 +9,7 @@ public class Main {
                 "Dog bobik",
                 "HORSE bobik",
                 "Dog sharik",
-                "DOG    ",
+                "DOG barbos",
                 "do Palkan"
         ));
 
