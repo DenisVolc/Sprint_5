@@ -4,36 +4,57 @@ import java.util.HashMap;
 public class AnimalFarm {
     ArrayList<String> farmAnimals;
 
+
+
     public AnimalFarm(ArrayList<String> farmAnimals) {
         this.farmAnimals = farmAnimals;
     }
 
-    public HashMap<String,Integer> countedAnimals(ArrayList<String> farmAnimals){ // Задание №1
+
+    public HashMap<String,Integer> countedAnimals(){ // Задание №1
         HashMap<String, Integer> resultCountedAnimals = new HashMap<>();
+        String animalErr = "";
         try {
-            //        HashMap<String, String> animalsAndItNames = new HashMap<>();
             for (String animal : farmAnimals) {
-                String[] animalName = animal.split(" ");
-//            animalsAndItNames.put(animalName[0],animalName[1]);
-                String animalNameTUC = animalName[0].toUpperCase();
-                Animal.valueOf(animalNameTUC);// тригер для try/catch
-                if (!resultCountedAnimals.containsKey(animalName[0])) {
-                    resultCountedAnimals.put(animalName[0], 1);
+                String[] animals = animal.split(" ");
+                animalErr = animal;
+                String animalSpeciesTUC = animals[0].toUpperCase();
+                Animal.valueOf(animalSpeciesTUC);// тригер для try/catch
+                if (!resultCountedAnimals.containsKey(animalSpeciesTUC)) {
+                    resultCountedAnimals.put(animalSpeciesTUC, 1);
                 } else {
-                    Integer animalsCount = resultCountedAnimals.get(animalName[1] + 1);
-                    resultCountedAnimals.put(animalName[0], animalsCount);
+                    Integer animalsCount = resultCountedAnimals.get(animalSpeciesTUC)+1;
+                    resultCountedAnimals.put(animalSpeciesTUC, animalsCount);
                 }
             }
         }catch(IllegalArgumentException exception){
-            System.out.println("Please correct string [Здесь вывести полностью ошибочную строку]. Incorrect input data.");
+            System.out.println("Please correct string ["+animalErr+"]. Incorrect input data.");
         }
         return resultCountedAnimals;
     }
+
+    public ArrayList<String> uniqueNames(){// Задание №2
+        ArrayList<String> result = new ArrayList<>();
+        String animalErr = "";
+        try {
+            for (String animal : farmAnimals) {
+                String[] animals = animal.split(" ");
+                animalErr = animal;
+                if (!result.contains(animals[1])) {
+                    result.add(animals[1]);
+                }
+            }
+        }catch(ArrayIndexOutOfBoundsException exception){
+            System.out.println("Please correct string ["+animalErr+"]. Incorrect input data.");
+        }
+        return result;
+        }
+
     public void addAnimal(Animal animalSpecies, String animalName){//Задание №3.1
         farmAnimals.add( animalSpecies.name() + " " + animalName );
     }
 
-    public void addAnimal(Animal animalSpecies){//Задание №3.2
+    public void addAnimal(Animal animalSpecies){//Задание №3.2Вид_животного Имя_животного
         farmAnimals.add(animalSpecies.name() + " N");
     }
 
@@ -41,7 +62,11 @@ public class AnimalFarm {
         farmAnimals.add(Animal.NOT_DEFINED.name() + " " + animalName);
     }
     @Override
-    public String toString(){ //Задание №4
-        return "Вид_животного Имя_животного";
+    public String toString() { //Задание №4
+        StringBuilder result = new StringBuilder();
+        for (String animal : farmAnimals) {
+            result = result.append(animal).append("\n");
+        }
+        return result.toString();
     }
 }
