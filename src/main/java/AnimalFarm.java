@@ -20,7 +20,7 @@ public class AnimalFarm {
                         Integer animalsCount = resultCountedAnimals.get(animalSpecies.name()) + 1;
                         resultCountedAnimals.put(animalSpecies.name(), animalsCount);
                     }
-                }catch(IllegalArgumentException exception) {
+                }catch(Exception e) {
                     System.out.println("Please correct string [" + animal + "]. Incorrect input data.");
                 }
             }
@@ -35,7 +35,7 @@ public class AnimalFarm {
                 if (!result.contains(animals[1])) {
                     result.add(animals[1]);
                 }
-                }catch(ArrayIndexOutOfBoundsException exception){
+                }catch(Exception e){
                     System.out.println("Please correct string ["+animal+"]. Incorrect input data.");
                 }
             }
